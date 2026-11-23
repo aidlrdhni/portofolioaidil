@@ -1,0 +1,2261 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rifqi Aidil Ridhani — Portofolio Siswa XI PPLG SMKN 2 Banjarmasin</title>
+  <script>
+    // Menerapkan preferensi tema tersimpan lebih awal untuk mencegah kedipan layar (FOUC)
+    (function () {
+      try {
+        var savedTheme = localStorage.getItem('rifqi_portfolio_theme');
+        if (savedTheme === 'dark') {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      } catch (e) {}
+    })();
+  </script>
+  <style>
+    /* ==========================================================================
+       1. DESIGN TOKENS & PALET WARNA TENANG (LIGHT & DARK MODE)
+       ========================================================================== */
+    :root {
+      /* Mode Terang (Default) */
+      --bg-page: #F8FAFC;
+      --bg-card: #FFFFFF;
+      --bg-subtle: #F1F5F9;
+      --bg-header: rgba(248, 250, 252, 0.88);
+      --border-color: #E2E8F0;
+      --border-strong: #CBD5E1;
+
+      --text-primary: #0F172A;
+      --text-secondary: #475569;
+      --text-muted: #64748B;
+
+      --accent-primary: #1E40AF;
+      --accent-hover: #2563EB;
+      --accent-soft: #EFF6FF;
+      --accent-border: #BFDBFE;
+
+      --badge-soft-bg: #ECFDF5;
+      --badge-soft-text: #065F46;
+      --badge-soft-border: #A7F3D0;
+
+      --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.04);
+      --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.05), 0 1px 2px rgba(15, 23, 42, 0.03);
+      --shadow-md: 0 10px 25px rgba(15, 23, 42, 0.07), 0 2px 6px rgba(15, 23, 42, 0.04);
+      --shadow-lg: 0 20px 45px rgba(15, 23, 42, 0.16);
+
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-full: 9999px;
+
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      --container-max: 1100px;
+    }
+
+    /* Mode Gelap Nyaman di Mata */
+    html[data-theme="dark"] {
+      --bg-page: #0B1120;
+      --bg-card: #1E293B;
+      --bg-subtle: #151F32;
+      --bg-header: rgba(11, 17, 32, 0.88);
+      --border-color: #334155;
+      --border-strong: #475569;
+
+      --text-primary: #F1F5F9;
+      --text-secondary: #94A3B8;
+      --text-muted: #64748B;
+
+      --accent-primary: #60A5FA;
+      --accent-hover: #3B82F6;
+      --accent-soft: rgba(96, 165, 250, 0.12);
+      --accent-border: rgba(96, 165, 250, 0.3);
+
+      --badge-soft-bg: rgba(16, 185, 129, 0.14);
+      --badge-soft-text: #6EE7B7;
+      --badge-soft-border: rgba(16, 185, 129, 0.3);
+
+      --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.28);
+      --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.36);
+      --shadow-lg: 0 20px 45px rgba(0, 0, 0, 0.55);
+    }
+
+    /* ==========================================================================
+       2. RESET & BASE STYLES
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-page);
+      color: var(--text-primary);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      transition: background-color 0.25s ease, color 0.25s ease;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ==========================================================================
+       3. KOMPONEN TOMBOL MINIMALIS
+       ========================================================================== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 11px 20px;
+      font-family: var(--font-sans);
+      font-size: 0.92rem;
+      font-weight: 600;
+      line-height: 1.2;
+      text-decoration: none;
+      color: var(--text-primary);
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-xs);
+      cursor: pointer;
+      transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
+      user-select: none;
+    }
+
+    .btn:hover {
+      background-color: var(--bg-subtle);
+      border-color: var(--text-secondary);
+      transform: translateY(-1px);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .btn-primary {
+      background-color: var(--accent-primary);
+      border-color: var(--accent-primary);
+      color: #FFFFFF;
+    }
+
+    html[data-theme="dark"] .btn-primary {
+      background-color: #2563EB;
+      border-color: #2563EB;
+      color: #FFFFFF;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--accent-hover);
+      border-color: var(--accent-hover);
+      color: #FFFFFF;
+    }
+
+    .btn-soft {
+      background-color: var(--accent-soft);
+      border-color: var(--accent-border);
+      color: var(--accent-primary);
+    }
+
+    .btn-soft:hover {
+      background-color: var(--accent-primary);
+      border-color: var(--accent-primary);
+      color: #FFFFFF;
+    }
+
+    html[data-theme="dark"] .btn-soft:hover {
+      background-color: #2563EB;
+      border-color: #2563EB;
+      color: #FFFFFF;
+    }
+
+    .btn-sm {
+      padding: 8px 14px;
+      font-size: 0.84rem;
+      border-radius: var(--radius-sm);
+    }
+
+    /* ==========================================================================
+       4. STICKY NAVBAR & TOMBOL MODE GELAP DI POJOK KANAN ATAS
+       ========================================================================== */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: var(--bg-header);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      transition: background-color 0.25s ease, border-color 0.25s ease;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+      gap: 16px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text-primary);
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: -0.025em;
+    }
+
+    .brand-dot {
+      color: var(--accent-primary);
+    }
+
+    .nav-right-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      list-style: none;
+    }
+
+    .nav-menu a {
+      display: inline-block;
+      padding: 8px 14px;
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+      font-weight: 500;
+      border-radius: var(--radius-sm);
+      transition: color 0.15s ease, background-color 0.15s ease;
+    }
+
+    .nav-menu a:hover {
+      color: var(--accent-primary);
+      background-color: var(--accent-soft);
+    }
+
+    /* Tombol Pengatur Mode Gelap / Terang di Pojok Kanan Atas */
+    .theme-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      height: 40px;
+      padding: 0 14px;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-full);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: var(--shadow-xs);
+      transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
+    }
+
+    .theme-toggle-btn:hover {
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+      background-color: var(--accent-soft);
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: border-color 0.15s ease, background-color 0.15s ease;
+    }
+
+    .mobile-menu-btn:hover {
+      border-color: var(--accent-primary);
+      background-color: var(--accent-soft);
+    }
+
+    /* ==========================================================================
+       5. HERO SECTION
+       ========================================================================== */
+    .hero-section {
+      padding: 80px 0 88px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.85fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .hero-subtitle-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background-color: var(--accent-soft);
+      border: 1px solid var(--accent-border);
+      border-radius: var(--radius-full);
+      color: var(--accent-primary);
+      font-size: 0.86rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .status-pulse {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: #10B981;
+      display: inline-block;
+    }
+
+    .hero-title {
+      font-size: clamp(2.2rem, 4.4vw, 3.25rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+      margin-bottom: 18px;
+    }
+
+    .hero-desc {
+      font-size: 1.06rem;
+      color: var(--text-secondary);
+      max-width: 580px;
+      margin-bottom: 32px;
+      line-height: 1.72;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    /* Kartu Status Ringkas di Sisi Kanan Hero */
+    .status-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      padding: 28px;
+      transition: background-color 0.25s ease, border-color 0.25s ease;
+    }
+
+    .status-card-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 20px;
+    }
+
+    .avatar-monogram {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius-md);
+      background-color: var(--accent-soft);
+      border: 1px solid var(--accent-border);
+      color: var(--accent-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      flex-shrink: 0;
+    }
+
+    .status-name {
+      font-size: 1.12rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+
+    .status-school {
+      font-size: 0.86rem;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+
+    .status-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .status-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 0.88rem;
+    }
+
+    .status-key {
+      color: var(--text-secondary);
+    }
+
+    .status-val {
+      font-weight: 600;
+      color: var(--text-primary);
+      text-align: right;
+    }
+
+    .live-wita-box {
+      background-color: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .wita-caption {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .wita-clock-value {
+      font-family: var(--font-mono);
+      font-size: 0.96rem;
+      font-weight: 700;
+      color: var(--accent-primary);
+    }
+
+    /* ==========================================================================
+       6. SECTION UMUM & TENTANG SAYA (#tentang)
+       ========================================================================== */
+    .section {
+      padding: 84px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .section-header {
+      margin-bottom: 42px;
+      max-width: 660px;
+    }
+
+    .section-eyebrow {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-primary);
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: clamp(1.7rem, 3.2vw, 2.2rem);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      color: var(--text-primary);
+      line-height: 1.25;
+      margin-bottom: 10px;
+    }
+
+    .section-desc {
+      font-size: 1rem;
+      color: var(--text-secondary);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.85fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .about-card, .biodata-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      padding: 32px;
+      transition: background-color 0.25s ease, border-color 0.25s ease;
+    }
+
+    .about-card h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 14px;
+    }
+
+    .about-card p {
+      font-size: 0.98rem;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      line-height: 1.72;
+    }
+
+    .about-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .biodata-card {
+      padding: 28px;
+    }
+
+    .biodata-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 16px;
+    }
+
+    .biodata-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .biodata-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .biodata-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .biodata-label {
+      font-size: 0.76rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
+    .biodata-value {
+      font-size: 0.96rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* ==========================================================================
+       7. SECTION KEAHLIAN (#keahlian)
+       ========================================================================== */
+    .filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .filter-btn {
+      padding: 8px 18px;
+      font-family: var(--font-sans);
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+    }
+
+    .filter-btn.active {
+      background-color: var(--accent-primary);
+      border-color: var(--accent-primary);
+      color: #FFFFFF;
+    }
+
+    html[data-theme="dark"] .filter-btn.active {
+      background-color: #2563EB;
+      border-color: #2563EB;
+      color: #FFFFFF;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .skill-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease, background-color 0.25s ease;
+    }
+
+    .skill-card.is-hidden {
+      display: none;
+    }
+
+    .skill-card:hover {
+      border-color: var(--accent-border);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .skill-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .skill-icon-box {
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-md);
+      background-color: var(--accent-soft);
+      color: var(--accent-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .skill-cat-pill {
+      font-size: 0.76rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      background-color: var(--bg-subtle);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-color);
+    }
+
+    .skill-cat-pill.soft-pill {
+      background-color: var(--badge-soft-bg);
+      color: var(--badge-soft-text);
+      border-color: var(--badge-soft-border);
+    }
+
+    .skill-title {
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .skill-summary {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .skill-accordion-bar {
+      border-top: 1px solid var(--border-color);
+      padding-top: 12px;
+    }
+
+    .skill-accordion-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--accent-primary);
+    }
+
+    .skill-note-panel {
+      display: none;
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      background-color: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    .skill-card.is-open .skill-note-panel {
+      display: block;
+    }
+
+    /* ==========================================================================
+       8. SECTION PROYEK (#proyek — 3 PROYEK UTAMA)
+       ========================================================================== */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .project-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease, background-color 0.25s ease;
+    }
+
+    .project-card:hover {
+      border-color: var(--accent-border);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-3px);
+    }
+
+    .project-visual {
+      background-color: var(--bg-subtle);
+      border-bottom: 1px solid var(--border-color);
+      padding: 20px;
+      height: 190px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .preview-window {
+      width: 100%;
+      max-width: 268px;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-xs);
+      padding: 12px 14px;
+    }
+
+    .preview-window-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 8px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .window-dots {
+      display: flex;
+      gap: 5px;
+    }
+
+    .window-dots span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: var(--border-strong);
+    }
+
+    .window-filename {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--text-muted);
+    }
+
+    /* Pratinjau Jam Digital Mini Live */
+    .mini-clock-display {
+      text-align: center;
+      padding: 6px 0 4px;
+    }
+
+    .mini-clock-time {
+      font-family: var(--font-mono);
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--accent-primary);
+      letter-spacing: 0.04em;
+      line-height: 1.2;
+    }
+
+    .mini-clock-date {
+      font-size: 0.72rem;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+
+    /* Pratinjau Dashboard Pengatur Jam */
+    .mini-dash-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+
+    .mini-dash-tile {
+      background-color: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 6px 8px;
+      font-size: 0.68rem;
+    }
+
+    .mini-dash-tile.highlight {
+      background-color: var(--accent-soft);
+      border-color: var(--accent-border);
+    }
+
+    .mini-dash-label {
+      color: var(--text-secondary);
+      display: block;
+    }
+
+    .mini-dash-val {
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .mini-dash-tile.highlight .mini-dash-val {
+      color: var(--accent-primary);
+    }
+
+    .project-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .project-index {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--accent-primary);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .project-title {
+      font-size: 1.18rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.35;
+      margin-bottom: 10px;
+    }
+
+    .project-desc {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.62;
+    }
+
+    .project-tech-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 14px;
+    }
+
+    .tech-badge {
+      font-size: 0.76rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      background-color: var(--bg-subtle);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-color);
+    }
+
+    .project-actions {
+      padding-top: 16px;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .project-category-label {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    /* ==========================================================================
+       9. SECTION KONTAK (#kontak — INSTAGRAM @aidlrdhni)
+       ========================================================================== */
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .instagram-contact-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 24px;
+      transition: background-color 0.25s ease, border-color 0.25s ease;
+    }
+
+    .ig-card-top {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .ig-icon-circle {
+      width: 54px;
+      height: 54px;
+      border-radius: var(--radius-md);
+      background-color: var(--accent-soft);
+      border: 1px solid var(--accent-border);
+      color: var(--accent-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .ig-handle-title {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+    }
+
+    .ig-handle-sub {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+
+    .ig-card-desc {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    .ig-card-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .school-contact-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 20px;
+      transition: background-color 0.25s ease, border-color 0.25s ease;
+    }
+
+    .school-contact-card h3 {
+      font-size: 1.12rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+
+    .school-contact-card p {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    .school-meta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      background-color: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* ==========================================================================
+       10. FOOTER
+       ========================================================================== */
+    .site-footer {
+      background-color: var(--bg-card);
+      padding: 28px 0;
+      transition: background-color 0.25s ease;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .footer-copy {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    /* ==========================================================================
+       11. MODAL DETAIL PROYEK
+       ========================================================================== */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-backdrop.is-open {
+      display: flex;
+    }
+
+    .modal-dialog {
+      width: 100%;
+      max-width: 560px;
+      max-height: 88vh;
+      overflow-y: auto;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      animation: modalFadeIn 0.2s ease-out;
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: translateY(10px) scale(0.98); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .modal-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .modal-title {
+      font-size: 1.18rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .modal-close-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+      background-color: transparent;
+      color: var(--text-secondary);
+      font-size: 1rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.15s ease, color 0.15s ease;
+    }
+
+    .modal-close-btn:hover {
+      background-color: var(--bg-subtle);
+      color: var(--text-primary);
+    }
+
+    .modal-body {
+      padding: 24px;
+    }
+
+    .modal-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent-primary);
+      margin-top: 18px;
+      margin-bottom: 8px;
+    }
+
+    .modal-label:first-child {
+      margin-top: 0;
+    }
+
+    .modal-text {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    .modal-features {
+      margin-left: 18px;
+      color: var(--text-secondary);
+      font-size: 0.93rem;
+    }
+
+    .modal-features li {
+      margin-bottom: 6px;
+    }
+
+    .modal-tech-box {
+      background-color: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .modal-footer {
+      padding: 16px 24px;
+      border-top: 1px solid var(--border-color);
+      background-color: var(--bg-subtle);
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    /* ==========================================================================
+       12. TOAST NOTIFICATION HALUS
+       ========================================================================== */
+    .toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 3000;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-width: calc(100vw - 48px);
+    }
+
+    .toast-item {
+      background-color: var(--bg-card);
+      color: var(--text-primary);
+      border: 1px solid var(--border-strong);
+      border-left: 4px solid var(--accent-primary);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-md);
+      padding: 12px 16px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      animation: toastSlideUp 0.2s ease-out;
+    }
+
+    @keyframes toastSlideUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ==========================================================================
+       13. RESPONSIVE BREAKPOINTS
+       ========================================================================== */
+    @media (max-width: 960px) {
+      .hero-grid,
+      .about-grid,
+      .contact-wrapper {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .skills-grid,
+      .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 720px) {
+      .skills-grid,
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .mobile-menu-btn {
+        display: inline-flex;
+      }
+
+      /* Di layar HP, tombol mode gelap tetap terlihat di pojok kanan atas tepat di sebelah tombol hamburger */
+      .nav-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: var(--bg-card);
+        border-bottom: 1px solid var(--border-color);
+        box-shadow: var(--shadow-md);
+        flex-direction: column;
+        align-items: stretch;
+        padding: 12px 24px 18px;
+        gap: 4px;
+      }
+
+      .nav-menu.is-open {
+        display: flex;
+      }
+
+      .nav-menu a {
+        padding: 10px 12px;
+      }
+
+      .theme-toggle-text {
+        display: none;
+      }
+
+      .theme-toggle-btn {
+        width: 40px;
+        padding: 0;
+      }
+
+      .hero-section {
+        padding: 52px 0 60px;
+      }
+
+      .section {
+        padding: 60px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================================
+       STICKY NAVBAR (DENGAN TOMBOL MODE GELAP DI POJOK KANAN ATAS)
+       ======================================================================== -->
+  <header class="site-header">
+    <div class="container nav-inner">
+      <!-- Logo Kiri -->
+      <a href="#top" class="brand" aria-label="Beranda Rifqi Aidil Ridhani">
+        <span>Rifqi<span class="brand-dot">.</span></span>
+      </a>
+
+      <!-- Grup Navigasi & Pengatur Tema di Pojok Kanan Atas -->
+      <div class="nav-right-group">
+        <nav aria-label="Navigasi Utama">
+          <ul class="nav-menu" id="navMenu">
+            <li><a href="#tentang">Tentang</a></li>
+            <li><a href="#keahlian">Keahlian</a></li>
+            <li><a href="#proyek">Proyek</a></li>
+            <li><a href="#kontak">Kontak</a></li>
+          </ul>
+        </nav>
+
+        <!-- Tombol Toggle Mode Gelap / Terang di Pojok Kanan Atas -->
+        <button
+          type="button"
+          id="themeToggleBtn"
+          class="theme-toggle-btn"
+          aria-label="Aktifkan Mode Gelap"
+          title="Ganti Mode Gelap / Terang"
+        >
+          <!-- Ikon Bulan (Tampil saat Mode Terang) -->
+          <svg id="iconMoon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <!-- Ikon Matahari (Tampil saat Mode Gelap) -->
+          <svg id="iconSun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <span class="theme-toggle-text" id="themeToggleLabel">Mode Gelap</span>
+        </button>
+
+        <!-- Tombol Menu Hamburger untuk Mobile -->
+        <button
+          type="button"
+          id="mobileMenuBtn"
+          class="mobile-menu-btn"
+          aria-label="Buka Menu Navigasi"
+          aria-expanded="false"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- ======================================================================
+         HERO SECTION
+         ====================================================================== -->
+    <section class="hero-section">
+      <div class="container hero-grid">
+        <div>
+          <div class="hero-subtitle-badge">
+            <span class="status-pulse" aria-hidden="true"></span>
+            <span>Siswa Kelas XI PPLG — SMKN 2 Banjarmasin</span>
+          </div>
+
+          <h1 class="hero-title">Rifqi Aidil Ridhani</h1>
+
+          <p class="hero-desc">
+            Pelajar program keahlian Pengembangan Perangkat Lunak dan Gim (PPLG) di SMKN 2 Banjarmasin yang berfokus pada pengembangan web berantarmuka bersih, ketelitian struktur kode, serta kedisiplinan dalam berkomunikasi dan bekerja sama di dalam tim.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#proyek" class="btn btn-primary">Lihat Proyek</a>
+            <a
+              href="https://instagram.com/aidlrdhni"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn"
+            >
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+              <span>Instagram @aidlrdhni</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Kartu Status Ringkas di Sisi Kanan -->
+        <aside class="status-card" aria-label="Status Ringkas Pelajar">
+          <div class="status-card-header">
+            <div class="avatar-monogram" aria-hidden="true">RA</div>
+            <div>
+              <div class="status-name">Rifqi Aidil Ridhani</div>
+              <div class="status-school">SMKN 2 Banjarmasin • XI PPLG</div>
+            </div>
+          </div>
+
+          <ul class="status-list">
+            <li class="status-item">
+              <span class="status-key">Kompetensi Keahlian</span>
+              <span class="status-val">PPLG</span>
+            </li>
+            <li class="status-item">
+              <span class="status-key">Fokus Utama</span>
+              <span class="status-val">Web &amp; UI Minimalis</span>
+            </li>
+            <li class="status-item">
+              <span class="status-key">Domisili</span>
+              <span class="status-val">Banjarmasin, Kal-Sel</span>
+            </li>
+          </ul>
+
+          <div class="live-wita-box" aria-label="Waktu Lokal Banjarmasin">
+            <span class="wita-caption">Waktu Lokal Banjarmasin (WITA)</span>
+            <span class="wita-clock-value" id="heroWitaClock">--:--:-- WITA</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         BAGIAN TENTANG SAYA (#tentang)
+         ====================================================================== -->
+    <section id="tentang" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Profil Akademik</span>
+          <h2 class="section-title">Tentang Saya</h2>
+          <p class="section-desc">
+            Ringkasan latar belakang pendidikan dan pendekatan kerja dalam mempelajari pengembangan perangkat lunak di tingkat sekolah menengah kejuruan.
+          </p>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-card">
+            <h3>Membangun Dasar Pengembangan Web yang Terstruktur</h3>
+            <p>
+              Saya adalah <strong>Rifqi Aidil Ridhani</strong>, siswa kelas XI pada kompetensi keahlian <strong>Pengembangan Perangkat Lunak dan Gim (PPLG) di SMKN 2 Banjarmasin</strong>. Selama menempuh pembelajaran kejuruan, saya mendalami fundamental pembuatan halaman web menggunakan HTML5, CSS3, dan JavaScript secara bertahap dan terukur.
+            </p>
+            <p>
+              Saya meyakini bahwa aplikasi web yang baik tidak hanya bergantung pada logika program yang akurat, tetapi juga pada tata letak visual yang tenang, mudah dipahami pengguna, serta kemampuan komunikasi dan kolaborasi yang solid bersama rekan tim selama pengerjaan proyek.
+            </p>
+          </div>
+
+          <div class="biodata-card">
+            <h3>Biodata Terstruktur</h3>
+            <div class="biodata-list">
+              <div class="biodata-item">
+                <span class="biodata-label">Nama Lengkap</span>
+                <span class="biodata-value">Rifqi Aidil Ridhani</span>
+              </div>
+              <div class="biodata-item">
+                <span class="biodata-label">Sekolah</span>
+                <span class="biodata-value">SMKN 2 Banjarmasin</span>
+              </div>
+              <div class="biodata-item">
+                <span class="biodata-label">Kompetensi Keahlian</span>
+                <span class="biodata-value">Pengembangan Perangkat Lunak dan Gim (PPLG)</span>
+              </div>
+              <div class="biodata-item">
+                <span class="biodata-label">Kelas</span>
+                <span class="biodata-value">XI (Sebelas)</span>
+              </div>
+              <div class="biodata-item">
+                <span class="biodata-label">Domisili</span>
+                <span class="biodata-value">Banjarmasin, Kalimantan Selatan</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         BAGIAN KEAHLIAN (#keahlian)
+         ====================================================================== -->
+    <section id="keahlian" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Kompetensi &amp; Keterampilan</span>
+          <h2 class="section-title">Keahlian</h2>
+          <p class="section-desc">
+            Perpaduan kemampuan teknis dasar pengembangan web dan keterampilan interpersonal. Klik kartu keahlian untuk melihat catatan penerapan praktisnya.
+          </p>
+        </div>
+
+        <!-- Filter Kategori -->
+        <div class="filter-group" role="group" aria-label="Filter kategori keahlian">
+          <button type="button" class="filter-btn active" data-filter="Semua">Semua</button>
+          <button type="button" class="filter-btn" data-filter="Teknis">Teknis</button>
+          <button type="button" class="filter-btn" data-filter="Soft Skills">Soft Skills</button>
+        </div>
+
+        <div class="skills-grid">
+          <!-- 1. HTML5 Dasar -->
+          <article class="skill-card" data-category="Teknis" tabindex="0" role="button" aria-expanded="false">
+            <div>
+              <div class="skill-top">
+                <div class="skill-icon-box" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="16 18 22 12 16 6"></polyline>
+                    <polyline points="8 6 2 12 8 18"></polyline>
+                  </svg>
+                </div>
+                <span class="skill-cat-pill">Teknis</span>
+              </div>
+              <h3 class="skill-title">HTML5 Dasar</h3>
+              <p class="skill-summary">
+                Menyusun kerangka dokumen web semantik, navigasi terstruktur, dan elemen antarmuka yang rapi serta mudah diakses.
+              </p>
+            </div>
+            <div class="skill-accordion-bar">
+              <div class="skill-accordion-label">
+                <span>Catatan penerapan praktis</span>
+                <span class="accordion-sign">+</span>
+              </div>
+              <div class="skill-note-panel">
+                Diterapkan untuk membangun struktur semantik halaman portofolio, tampilan panel jam digital, dan tata letak kontrol dashboard yang terorganisir.
+              </div>
+            </div>
+          </article>
+
+          <!-- 2. CSS3 Dasar -->
+          <article class="skill-card" data-category="Teknis" tabindex="0" role="button" aria-expanded="false">
+            <div>
+              <div class="skill-top">
+                <div class="skill-icon-box" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                    <line x1="3" y1="9" x2="21" y2="9"></line>
+                    <line x1="9" y1="21" x2="9" y2="9"></line>
+                  </svg>
+                </div>
+                <span class="skill-cat-pill">Teknis</span>
+              </div>
+              <h3 class="skill-title">CSS3 Dasar</h3>
+              <p class="skill-summary">
+                Mengatur tata letak responsif menggunakan Flexbox dan CSS Grid, variabel warna tema, serta proporsi jarak yang seimbang.
+              </p>
+            </div>
+            <div class="skill-accordion-bar">
+              <div class="skill-accordion-label">
+                <span>Catatan penerapan praktis</span>
+                <span class="accordion-sign">+</span>
+              </div>
+              <div class="skill-note-panel">
+                Digunakan untuk merancang sistem tema Terang &amp; Gelap yang nyaman di mata serta memastikan tampilan beradaptasi mulus di layar ponsel maupun laptop.
+              </div>
+            </div>
+          </article>
+
+          <!-- 3. JavaScript Dasar -->
+          <article class="skill-card" data-category="Teknis" tabindex="0" role="button" aria-expanded="false">
+            <div>
+              <div class="skill-top">
+                <div class="skill-icon-box" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                  </svg>
+                </div>
+                <span class="skill-cat-pill">Teknis</span>
+              </div>
+              <h3 class="skill-title">JavaScript Dasar</h3>
+              <p class="skill-summary">
+                Manipulasi DOM interaktif, pengelolaan logika waktu real-time, penanganan event pengguna, dan penyimpanan lokal.
+              </p>
+            </div>
+            <div class="skill-accordion-bar">
+              <div class="skill-accordion-label">
+                <span>Catatan penerapan praktis</span>
+                <span class="accordion-sign">+</span>
+              </div>
+              <div class="skill-note-panel">
+                Diterapkan pada pembaruan detik secara real-time di aplikasi Jam Digital, logika pengaturan timer pada dashboard, serta penyimpanan preferensi mode gelap.
+              </div>
+            </div>
+          </article>
+
+          <!-- 4. Desain UI Dasar -->
+          <article class="skill-card" data-category="Teknis" tabindex="0" role="button" aria-expanded="false">
+            <div>
+              <div class="skill-top">
+                <div class="skill-icon-box" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 19l7-7 3 3-7 7-3-3z"></path>
+                    <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>
+                    <path d="M2 2l7.586 7.586"></path>
+                  </svg>
+                </div>
+                <span class="skill-cat-pill">Teknis</span>
+              </div>
+              <h3 class="skill-title">Desain UI Dasar</h3>
+              <p class="skill-summary">
+                Merancang tata letak antarmuka minimalis dengan hierarki tipografi yang jelas, keterbacaan tinggi, dan navigasi intuitif.
+              </p>
+            </div>
+            <div class="skill-accordion-bar">
+              <div class="skill-accordion-label">
+                <span>Catatan penerapan praktis</span>
+                <span class="accordion-sign">+</span>
+              </div>
+              <div class="skill-note-panel">
+                Mengutamakan kesederhanaan visual dan pemilihan kontras warna yang tidak melelahkan mata sehingga informasi utama mudah dipindai pengguna.
+              </div>
+            </div>
+          </article>
+
+          <!-- 5. Komunikasi -->
+          <article class="skill-card" data-category="Soft Skills" tabindex="0" role="button" aria-expanded="false">
+            <div>
+              <div class="skill-top">
+                <div class="skill-icon-box" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                  </svg>
+                </div>
+                <span class="skill-cat-pill soft-pill">Soft Skills</span>
+              </div>
+              <h3 class="skill-title">Komunikasi</h3>
+              <p class="skill-summary">
+                Menyampaikan ide rancangan secara runtut, mendengarkan masukan dengan terbuka, dan mempresentasikan hasil karya dengan jelas.
+              </p>
+            </div>
+            <div class="skill-accordion-bar">
+              <div class="skill-accordion-label">
+                <span>Catatan penerapan praktis</span>
+                <span class="accordion-sign">+</span>
+              </div>
+              <div class="skill-note-panel">
+                Terlatih saat memaparkan alur kerja aplikasi dan fitur antarmuka di hadapan guru serta teman sekelas pada kegiatan praktik di SMKN 2 Banjarmasin.
+              </div>
+            </div>
+          </article>
+
+          <!-- 6. Kerja Tim -->
+          <article class="skill-card" data-category="Soft Skills" tabindex="0" role="button" aria-expanded="false">
+            <div>
+              <div class="skill-top">
+                <div class="skill-icon-box" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                  </svg>
+                </div>
+                <span class="skill-cat-pill soft-pill">Soft Skills</span>
+              </div>
+              <h3 class="skill-title">Kerja Tim</h3>
+              <p class="skill-summary">
+                Berkolaborasi dalam kelompok praktikum PPLG dengan pembagian tugas yang terkoordinasi dan tanggung jawab bersama.
+              </p>
+            </div>
+            <div class="skill-accordion-bar">
+              <div class="skill-accordion-label">
+                <span>Catatan penerapan praktis</span>
+                <span class="accordion-sign">+</span>
+              </div>
+              <div class="skill-note-panel">
+                Bekerja sama dalam menyelaraskan struktur kode, tata letak tampilan, dan pengujian fungsi aplikasi bersama rekan kelompok belajar.
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         BAGIAN PROYEK (#proyek — 3 PROYEK UTAMA)
+         ====================================================================== -->
+    <section id="proyek" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Karya Pilihan</span>
+          <h2 class="section-title">Proyek yang Dikerjakan</h2>
+          <p class="section-desc">
+            Tiga proyek utama yang berfokus pada ketepatan logika waktu berbasis web, panel kontrol dashboard, dan perancangan portofolio responsif.
+          </p>
+        </div>
+
+        <div class="projects-grid">
+          <!-- PROYEK 1: Jam Digital (Dengan Pratinjau Komponen Jam Digital Mini Real-Time) -->
+          <article class="project-card">
+            <div>
+              <div class="project-visual">
+                <div class="preview-window" aria-label="Pratinjau langsung komponen Jam Digital mini">
+                  <div class="preview-window-bar">
+                    <div class="window-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+                    <span class="window-filename">jam-digital.html • LIVE</span>
+                  </div>
+                  <div class="mini-clock-display">
+                    <div class="mini-clock-time" id="miniDigitalClockTime">00:00:00</div>
+                    <div class="mini-clock-date" id="miniDigitalClockDate">Memuat tanggal...</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="project-body">
+                <div>
+                  <span class="project-index">PROYEK 01</span>
+                  <h3 class="project-title">Jam Digital</h3>
+                  <p class="project-desc">
+                    Aplikasi jam digital real-time berbasis web dengan tampilan waktu presisi (jam, menit, detik), informasi tanggal lengkap, dan keterbacaan angka yang bersih di berbagai ukuran layar.
+                  </p>
+                  <div class="project-tech-list">
+                    <span class="tech-badge">HTML</span>
+                    <span class="tech-badge">CSS</span>
+                    <span class="tech-badge">JavaScript</span>
+                  </div>
+                </div>
+
+                <div class="project-actions">
+                  <span class="project-category-label">Aplikasi Web</span>
+                  <button type="button" class="btn btn-sm btn-soft open-modal-btn" data-project="1">
+                    Lihat Detail
+                  </button>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- PROYEK 2: Web Dashboard Pengatur Jam Digital -->
+          <article class="project-card">
+            <div>
+              <div class="project-visual">
+                <div class="preview-window" aria-hidden="true">
+                  <div class="preview-window-bar">
+                    <div class="window-dots"><span></span><span></span><span></span></div>
+                    <span class="window-filename">dashboard-jam.html</span>
+                  </div>
+                  <div class="mini-dash-grid">
+                    <div class="mini-dash-tile highlight">
+                      <span class="mini-dash-label">Alarm Aktif</span>
+                      <span class="mini-dash-val">06:00 WITA</span>
+                    </div>
+                    <div class="mini-dash-tile">
+                      <span class="mini-dash-label">Timer Belajar</span>
+                      <span class="mini-dash-val">25:00 Siap</span>
+                    </div>
+                    <div class="mini-dash-tile">
+                      <span class="mini-dash-label">Format Waktu</span>
+                      <span class="mini-dash-val">24 Jam</span>
+                    </div>
+                    <div class="mini-dash-tile">
+                      <span class="mini-dash-label">Tema Jam</span>
+                      <span class="mini-dash-val">Adaptif</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="project-body">
+                <div>
+                  <span class="project-index">PROYEK 02</span>
+                  <h3 class="project-title">Web Dashboard Pengatur Jam Digital</h3>
+                  <p class="project-desc">
+                    Antarmuka panel kontrol berbasis web untuk mengatur alarm harian, pengatur waktu (timer), pilihan format 12/24 jam, serta pengaturan tema tampilan jam digital secara terpusat.
+                  </p>
+                  <div class="project-tech-list">
+                    <span class="tech-badge">HTML</span>
+                    <span class="tech-badge">CSS</span>
+                    <span class="tech-badge">JavaScript</span>
+                  </div>
+                </div>
+
+                <div class="project-actions">
+                  <span class="project-category-label">Panel Kontrol</span>
+                  <button type="button" class="btn btn-sm btn-soft open-modal-btn" data-project="2">
+                    Lihat Detail
+                  </button>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- PROYEK 3: Desain Web Portofolio -->
+          <article class="project-card">
+            <div>
+              <div class="project-visual">
+                <div class="preview-window" aria-hidden="true">
+                  <div class="preview-window-bar">
+                    <div class="window-dots"><span></span><span></span><span></span></div>
+                    <span class="window-filename">portofolio.html</span>
+                  </div>
+                  <div>
+                    <div style="height: 8px; width: 42%; background-color: var(--accent-primary); border-radius: 4px; margin-bottom: 6px;"></div>
+                    <div style="height: 6px; width: 88%; background-color: var(--border-strong); border-radius: 4px; margin-bottom: 10px;"></div>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;">
+                      <div style="height: 28px; background-color: var(--bg-subtle); border: 1px solid var(--border-color); border-radius: 6px;"></div>
+                      <div style="height: 28px; background-color: var(--bg-subtle); border: 1px solid var(--border-color); border-radius: 6px;"></div>
+                      <div style="height: 28px; background-color: var(--bg-subtle); border: 1px solid var(--border-color); border-radius: 6px;"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="project-body">
+                <div>
+                  <span class="project-index">PROYEK 03</span>
+                  <h3 class="project-title">Desain Web Portofolio</h3>
+                  <p class="project-desc">
+                    Perancangan tata letak situs portofolio pribadi yang responsif dengan hierarki tipografi yang jelas, struktur informasi teratur, dan dukungan penuh mode gelap yang nyaman di mata.
+                  </p>
+                  <div class="project-tech-list">
+                    <span class="tech-badge">HTML</span>
+                    <span class="tech-badge">CSS</span>
+                    <span class="tech-badge">JavaScript</span>
+                  </div>
+                </div>
+
+                <div class="project-actions">
+                  <span class="project-category-label">Desain &amp; Web</span>
+                  <button type="button" class="btn btn-sm btn-soft open-modal-btn" data-project="3">
+                    Lihat Detail
+                  </button>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         BAGIAN KONTAK (#kontak — INSTAGRAM @aidlrdhni)
+         ====================================================================== -->
+    <section id="kontak" class="section" style="border-bottom: none;">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Terhubung</span>
+          <h2 class="section-title">Kontak</h2>
+          <p class="section-desc">
+            Silakan terhubung melalui akun Instagram resmi saya untuk berdiskusi mengenai proyek pengembangan web dasar atau kolaborasi pembelajaran.
+          </p>
+        </div>
+
+        <div class="contact-wrapper">
+          <!-- Kartu Kontak Utama Instagram @aidlrdhni -->
+          <div class="instagram-contact-card">
+            <div>
+              <div class="ig-card-top">
+                <div class="ig-icon-circle" aria-hidden="true">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="ig-handle-title">@aidlrdhni</h3>
+                  <p class="ig-handle-sub">Instagram Resmi • Rifqi Aidil Ridhani</p>
+                </div>
+              </div>
+
+              <p class="ig-card-desc" style="margin-top: 18px;">
+                Anda dapat mengunjungi profil Instagram saya secara langsung atau menyalin username untuk menghubungi saya terkait dokumentasi proyek dan kegiatan belajar di PPLG.
+              </p>
+            </div>
+
+            <div class="ig-card-buttons">
+              <a
+                href="https://instagram.com/aidlrdhni"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-primary"
+              >
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+                <span>Buka Profil Instagram</span>
+              </a>
+
+              <button type="button" id="copyIgUsernameBtn" class="btn">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span>Salin Username</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Kartu Informasi Akademik & Lokasi -->
+          <div class="school-contact-card">
+            <div>
+              <h3>Lingkungan Pendidikan</h3>
+              <p>
+                Saat ini menempuh pendidikan kejuruan pada program keahlian Pengembangan Perangkat Lunak dan Gim (PPLG) kelas XI.
+              </p>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+              <div class="school-meta-pill">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                  <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                </svg>
+                <span>SMKN 2 Banjarmasin — XI PPLG</span>
+              </div>
+
+              <div class="school-meta-pill">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span>Banjarmasin, Kalimantan Selatan</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================
+       FOOTER SEDERHANA
+       ======================================================================== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-copy">&copy; 2026 Rifqi Aidil Ridhani — SMKN 2 Banjarmasin</p>
+      <a href="#top" class="btn btn-sm">Kembali ke Atas &uarr;</a>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       MODAL DETAIL PROYEK
+       ======================================================================== -->
+  <div class="modal-backdrop" id="projectModal" role="dialog" aria-modal="true" aria-labelledby="modalProjectTitle">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modalProjectTitle">Detail Proyek</h3>
+        <button type="button" class="modal-close-btn" id="modalCloseXBtn" aria-label="Tutup Modal">&#x2715;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-label">Ringkasan Proyek</div>
+        <p class="modal-text" id="modalProjectDesc"></p>
+
+        <div class="modal-label">Fitur Utama</div>
+        <ul class="modal-features" id="modalProjectFeatures"></ul>
+
+        <div class="modal-label">Teknologi yang Digunakan</div>
+        <div class="modal-tech-box" id="modalProjectTech"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-primary" id="modalDoneBtn">Tutup</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       CONTAINER NOTIFIKASI TOAST
+       ======================================================================== -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <!-- ========================================================================
+       VANILLA JAVASCRIPT MANDIRI
+       ======================================================================== -->
+  <script>
+    (function () {
+      'use strict';
+
+      /* ----------------------------------------------------------------------
+         1. PENGATURAN MODE GELAP / TERANG (PERSISTEN DI LOCALSTORAGE)
+         ---------------------------------------------------------------------- */
+      const THEME_STORAGE_KEY = 'rifqi_portfolio_theme';
+      const themeToggleBtn = document.getElementById('themeToggleBtn');
+      const themeToggleLabel = document.getElementById('themeToggleLabel');
+      const iconMoon = document.getElementById('iconMoon');
+      const iconSun = document.getElementById('iconSun');
+
+      function updateThemeUI(isDark) {
+        if (isDark) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+          themeToggleLabel.textContent = 'Mode Terang';
+          themeToggleBtn.setAttribute('aria-label', 'Aktifkan Mode Terang');
+          iconMoon.style.display = 'none';
+          iconSun.style.display = 'block';
+        } else {
+          document.documentElement.removeAttribute('data-theme');
+          themeToggleLabel.textContent = 'Mode Gelap';
+          themeToggleBtn.setAttribute('aria-label', 'Aktifkan Mode Gelap');
+          iconMoon.style.display = 'block';
+          iconSun.style.display = 'none';
+        }
+      }
+
+      // Sinkronkan ikon dan label saat halaman dimuat
+      updateThemeUI(document.documentElement.getAttribute('data-theme') === 'dark');
+
+      themeToggleBtn.addEventListener('click', function () {
+        const currentlyDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        const nextIsDark = !currentlyDark;
+        updateThemeUI(nextIsDark);
+        try {
+          localStorage.setItem(THEME_STORAGE_KEY, nextIsDark ? 'dark' : 'light');
+        } catch (e) {}
+      });
+
+      /* ----------------------------------------------------------------------
+         2. NAVIGASI HAMBURGER RESPONSIF UNTUK PERANGKAT MOBILE
+         ---------------------------------------------------------------------- */
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      const navMenu = document.getElementById('navMenu');
+
+      mobileMenuBtn.addEventListener('click', function () {
+        const isOpen = navMenu.classList.toggle('is-open');
+        mobileMenuBtn.setAttribute('aria-expanded', String(isOpen));
+      });
+
+      navMenu.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          navMenu.classList.remove('is-open');
+          mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      /* ----------------------------------------------------------------------
+         3. JAM REAL-TIME WITA (HERO) & PRATINJAU JAM DIGITAL MINI (PROYEK 1)
+         ---------------------------------------------------------------------- */
+      const heroWitaClock = document.getElementById('heroWitaClock');
+      const miniDigitalClockTime = document.getElementById('miniDigitalClockTime');
+      const miniDigitalClockDate = document.getElementById('miniDigitalClockDate');
+
+      function updateLiveClocks() {
+        const now = new Date();
+
+        // Pembaruan Jam WITA (Asia/Makassar - Banjarmasin) pada Hero Card
+        if (heroWitaClock) {
+          try {
+            const witaTime = new Intl.DateTimeFormat('id-ID', {
+              timeZone: 'Asia/Makassar',
+              hour: '2-digit',
+              minute: '2-digit',
+              second: '2-digit',
+              hour12: false
+            }).format(now).replace(/\./g, ':');
+            heroWitaClock.textContent = witaTime + ' WITA';
+          } catch (e) {
+            const pad = function (n) { return String(n).padStart(2, '0'); };
+            heroWitaClock.textContent = pad(now.getHours()) + ':' + pad(now.getMinutes()) + ':' + pad(now.getSeconds()) + ' WITA';
+          }
+        }
+
+        // Pembaruan Komponen Pratinjau Jam Digital Mini pada Kartu Proyek 01
+        if (miniDigitalClockTime && miniDigitalClockDate) {
+          try {
+            const localTime = new Intl.DateTimeFormat('id-ID', {
+              timeZone: 'Asia/Makassar',
+              hour: '2-digit',
+              minute: '2-digit',
+              second: '2-digit',
+              hour12: false
+            }).format(now).replace(/\./g, ':');
+
+            const localDate = new Intl.DateTimeFormat('id-ID', {
+              timeZone: 'Asia/Makassar',
+              weekday: 'long',
+              day: 'numeric',
+              month: 'long',
+              year: 'numeric'
+            }).format(now);
+
+            miniDigitalClockTime.textContent = localTime;
+            miniDigitalClockDate.textContent = localDate;
+          } catch (e) {
+            const pad = function (n) { return String(n).padStart(2, '0'); };
+            miniDigitalClockTime.textContent = pad(now.getHours()) + ':' + pad(now.getMinutes()) + ':' + pad(now.getSeconds());
+            miniDigitalClockDate.textContent = now.toDateString();
+          }
+        }
+      }
+
+      updateLiveClocks();
+      setInterval(updateLiveClocks, 1000);
+
+      /* ----------------------------------------------------------------------
+         4. FILTER KATEGORI & EXPAND CATATAN KEAHLIAN
+         ---------------------------------------------------------------------- */
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const skillCards = document.querySelectorAll('.skill-card');
+
+      filterButtons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          filterButtons.forEach(function (b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+
+          const selected = btn.getAttribute('data-filter');
+          skillCards.forEach(function (card) {
+            const category = card.getAttribute('data-category');
+            if (selected === 'Semua' || category === selected) {
+              card.classList.remove('is-hidden');
+            } else {
+              card.classList.add('is-hidden');
+            }
+          });
+        });
+      });
+
+      skillCards.forEach(function (card) {
+        card.addEventListener('click', function () {
+          const isOpen = card.classList.toggle('is-open');
+          card.setAttribute('aria-expanded', String(isOpen));
+          const sign = card.querySelector('.accordion-sign');
+          if (sign) {
+            sign.textContent = isOpen ? '−' : '+';
+          }
+        });
+
+        card.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            card.click();
+          }
+        });
+      });
+
+      /* ----------------------------------------------------------------------
+         5. MODAL DETAIL PROYEK (3 PROYEK UTAMA)
+         ---------------------------------------------------------------------- */
+      const projectData = {
+        '1': {
+          title: 'Jam Digital',
+          desc: 'Aplikasi jam digital real-time berbasis web yang dirancang dengan tipografi angka monospace yang tegas dan kontras nyaman di mata. Menggunakan JavaScript Date API dan interval presisi untuk memperbarui jam, menit, detik, serta tanggal lengkap secara otomatis.',
+          features: [
+            'Penunjuk waktu real-time meliputi jam, menit, dan detik yang diperbarui setiap detik.',
+            'Tampilan hari, tanggal, bulan, dan tahun lengkap dalam format Bahasa Indonesia.',
+            'Tipografi monospace yang menjaga posisi angka tetap stabil saat detik berganti.',
+            'Tata letak responsif yang menyesuaikan layar perangkat seluler maupun desktop.'
+          ],
+          tech: 'HTML5 Semantik, CSS3 Flexbox & Tipografi Monospace, Vanilla JavaScript (Date API)'
+        },
+        '2': {
+          title: 'Web Dashboard Pengatur Jam Digital',
+          desc: 'Antarmuka panel kontrol berbasis web yang berfungsi untuk mengatur konfigurasi tampilan dan fitur jam digital. Memudahkan pengguna mengelola jadwal alarm harian, menjalankan pengatur waktu (timer), mengganti format 12/24 jam, serta menyesuaikan tema jam.',
+          features: [
+            'Pengaturan alarm harian dengan indikator status aktif dan nonaktif.',
+            'Pengatur waktu hitung mundur (timer) untuk manajemen sesi belajar atau kegiatan.',
+            'Sakelar pengubah format waktu antara 12 jam (AM/PM) dan 24 jam.',
+            'Pengaturan tema tampilan jam digital yang selaras dengan kenyamanan mata.'
+          ],
+          tech: 'HTML5, CSS3 Grid Layout, Vanilla JavaScript DOM & Event Handling'
+        },
+        '3': {
+          title: 'Desain Web Portofolio',
+          desc: 'Perancangan dan pengembangan situs portofolio pribadi bernuansa serius, bersih, dan minimalis untuk mendokumentasikan profil akademik sebagai siswa kelas XI PPLG SMKN 2 Banjarmasin, daftar keahlian teknis maupun soft skills, serta karya pilihan.',
+          features: [
+            'Palet warna slate dan biru tenang yang ramah di mata pada Mode Terang maupun Mode Gelap.',
+            'Hierarki tipografi yang jelas untuk memudahkan pembacaan informasi profil dan proyek.',
+            'Komponen interaktif ringan meliputi filter keahlian, akordeon catatan, modal detail proyek, dan jam lokal WITA.',
+            'Desain adaptif dan responsif tanpa bergantung pada framework eksternal.'
+          ],
+          tech: 'Pure HTML5, CSS3 Custom Properties, dan Vanilla JavaScript'
+        }
+      };
+
+      const projectModal = document.getElementById('projectModal');
+      const modalProjectTitle = document.getElementById('modalProjectTitle');
+      const modalProjectDesc = document.getElementById('modalProjectDesc');
+      const modalProjectFeatures = document.getElementById('modalProjectFeatures');
+      const modalProjectTech = document.getElementById('modalProjectTech');
+      const modalCloseXBtn = document.getElementById('modalCloseXBtn');
+      const modalDoneBtn = document.getElementById('modalDoneBtn');
+
+      function openProjectModal(projectId) {
+        const info = projectData[projectId];
+        if (!info) return;
+
+        modalProjectTitle.textContent = info.title;
+        modalProjectDesc.textContent = info.desc;
+        modalProjectTech.textContent = info.tech;
+
+        modalProjectFeatures.innerHTML = '';
+        info.features.forEach(function (feat) {
+          const li = document.createElement('li');
+          li.textContent = feat;
+          modalProjectFeatures.appendChild(li);
+        });
+
+        projectModal.classList.add('is-open');
+        modalCloseXBtn.focus();
+      }
+
+      function closeProjectModal() {
+        projectModal.classList.remove('is-open');
+      }
+
+      document.querySelectorAll('.open-modal-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          openProjectModal(btn.getAttribute('data-project'));
+        });
+      });
+
+      modalCloseXBtn.addEventListener('click', closeProjectModal);
+      modalDoneBtn.addEventListener('click', closeProjectModal);
+
+      projectModal.addEventListener('click', function (e) {
+        if (e.target === projectModal) {
+          closeProjectModal();
+        }
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && projectModal.classList.contains('is-open')) {
+          closeProjectModal();
+        }
+      });
+
+      /* ----------------------------------------------------------------------
+         6. SALIN USERNAME INSTAGRAM & NOTIFIKASI TOAST HALUS
+         ---------------------------------------------------------------------- */
+      const toastContainer = document.getElementById('toastContainer');
+      const copyIgUsernameBtn = document.getElementById('copyIgUsernameBtn');
+
+      function showToast(message) {
+        const toast = document.createElement('div');
+        toast.className = 'toast-item';
+        toast.textContent = message;
+        toastContainer.appendChild(toast);
+
+        setTimeout(function () {
+          toast.style.opacity = '0';
+          toast.style.transform = 'translateY(8px)';
+          toast.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
+          setTimeout(function () {
+            toast.remove();
+          }, 220);
+        }, 3000);
+      }
+
+      function copyTextSafely(text) {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.setAttribute('readonly', '');
+        textarea.style.position = 'fixed';
+        textarea.style.top = '-9999px';
+        textarea.style.left = '-9999px';
+        document.body.appendChild(textarea);
+        textarea.select();
+        textarea.setSelectionRange(0, textarea.value.length);
+
+        let success = false;
+        try {
+          success = document.execCommand('copy');
+        } catch (err) {
+          success = false;
+        }
+        document.body.removeChild(textarea);
+
+        if (!success && navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).catch(function () {});
+        }
+      }
+
+      if (copyIgUsernameBtn) {
+        copyIgUsernameBtn.addEventListener('click', function () {
+          copyTextSafely('@aidlrdhni');
+          showToast('Username Instagram @aidlrdhni berhasil disalin.');
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
